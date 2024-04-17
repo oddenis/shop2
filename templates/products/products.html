@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+          <h2>Товары</h2>
+
+     <div class="col-md-6">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                  {{ form.title.errors }}
+                  <label for="{{form.title.id_for_label}}" >Название товара</label>
+                  {{form.title}}
+              </div>
+              <div class="mb-3">
+                  {{ form.description.errors }}
+                    <label for="{{form.description.id_for_label}}" >Описание</label>
+                  {{form.description}}
+              </div>
+              <div class="mb-3">
+                  {{ form.count.errors }}
+                  <label for="{{form.count.id_for_label}}" >Количество</label>
+                  {{form.count}}
+              </div>
+              <div class="mb-3">
+                  {{ form.cost.errors }}
+                  <label for="{{form.cost.id_for_label}}" >Цена(руб)</label>
+                  {{form.cost}}
+              </div>
+
+            <button type="submit">Добавить товар</button>
+            </form>
+            </div>
+
+
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Название</th>
+                  <th>Описание</th>
+                  <th>Кол-во</th>
+                  <th>Цена</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for product in products %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{product.title}}</td>
+                  <td>{{product.description}}</td>
+                  <td>{{product.count}}</td>
+                  <td>{{product.cost}}</td>
+                </tr>
+              {%endfor%}
+
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+{% endblock %}
